@@ -6,6 +6,38 @@ const id_isp = document.getElementById("id_isp")
 const btn_pesquisar = document.getElementById("btn_pesquisar")
 let map;
 
+function sucess(pos){
+    console.log(pos.coords, pos.coords.longitude)
+        
+    map = L.map('map').setView([pos.coords.latitude, pos.coords.longitude], 22);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+var myIcon = L.icon({
+    iconUrl: 'images/icon-location.svg',
+    iconSize: [30, 50],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+});
+
+L.marker([pos.coords.latitude, pos.coords.longitude], {icon: myIcon}).addTo(map)
+    .bindPopup('Você esta aqui.')
+    .openPopup();
+    
+}
+    
+function error(err){
+    console.log(err)
+}
+
+var watchID = navigator.geolocation.watchPosition(sucess, error, {
+    enableHighAccuracy: true,
+    timeout: 5000
+
+})
+
 
 
 btn_pesquisar.addEventListener("click", ()=>{
@@ -19,34 +51,16 @@ btn_pesquisar.addEventListener("click", ()=>{
         id_location.innerHTML = dados.location.country + ", " + dados.location.region
         id_timezone.innerHTML = dados.location.timezone
         id_isp.innerHTML = dados.isp
-        console.log(dados.location.lat,dados.location.lng)
-        map.remove()
-        map = L.map('map').setView([-7.32861, -35.3325], 22)
-       })
-        
-       
-})
+        map.panTo(L.latLng(dados.location.lat, dados.location.lng));
+        var myIcon = L.icon({
+            iconUrl: 'images/icon-location.svg',
+            iconSize: [20, 40],
+            iconAnchor: [22, 94],
+            popupAnchor: [-3, -76],
+            shadowSize: [68, 95],
+            shadowAnchor: [22, 94]
+        });
 
-
-function sucess(pos){
-    console.log(pos.coords.latitude, pos.coords.longitude)
-        
-    map = L.map('map').setView([pos.coords.latitude, pos.coords.longitude], 22);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([pos.coords.latitude, pos.coords.longitude]).addTo(map)
-    .bindPopup('Você esta aqui.')
-    .openPopup();
-}
-    
-
-function error(err){
-    console.log(err)
-}
-
-var watchID = navigator.geolocation.watchPosition(sucess, error, {
-    enableHighAccuracy: true,
-    timeout: 5000
+        L.marker([dados.location.lat, dados.location.lng], {icon: myIcon}).addTo(map);
+    }) 
 })
