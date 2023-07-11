@@ -125,8 +125,7 @@ header .pesquisa input::-webkit-inner-spin-button {
     .info {
          width: 90%;
          left: 5%;
- 
-}
+    }
 
     .info .conteiner p {
         font-size: 12px;
@@ -141,4 +140,8 @@ header .pesquisa input::-webkit-inner-spin-button {
     header .pesquisa input {
         width: 290px;
     }
+
+    .info {
+        top: 20%;
+   }
 }
