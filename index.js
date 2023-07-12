@@ -23,7 +23,6 @@ var myIcon = L.icon({
 });
 
 L.marker([pos.coords.latitude, pos.coords.longitude], {icon: myIcon}).addTo(map)
-    .bindPopup('Você esta aqui.')
     .openPopup()
     
     
