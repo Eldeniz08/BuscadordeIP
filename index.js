@@ -9,13 +9,13 @@ let map;
 function sucess(pos){
     console.log(pos.coords, pos.coords.longitude)
         
-    map = L.map('map').setView([pos.coords.latitude, pos.coords.longitude], 22);
+    map = L.map('map').setView([pos.coords.latitude, pos.coords.longitude], 15);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 var myIcon = L.icon({
     iconUrl: 'images/icon-location.svg',
-    iconSize: [30, 50],
+    iconSize: [30, 40],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76],
     shadowSize: [68, 95],
@@ -24,7 +24,8 @@ var myIcon = L.icon({
 
 L.marker([pos.coords.latitude, pos.coords.longitude], {icon: myIcon}).addTo(map)
     .bindPopup('Você esta aqui.')
-    .openPopup();
+    .openPopup()
+    
     
 }
     
