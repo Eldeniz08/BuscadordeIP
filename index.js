@@ -54,7 +54,7 @@ btn_pesquisar.addEventListener("click", ()=>{
         map.panTo(L.latLng(dados.location.lat, dados.location.lng));
         var myIcon = L.icon({
             iconUrl: 'images/icon-location.svg',
-            iconSize: [20, 40],
+            iconSize: [30, 40],
             iconAnchor: [22, 94],
             popupAnchor: [-3, -76],
             shadowSize: [68, 95],
